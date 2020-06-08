@@ -1,0 +1,43 @@
+{
+    "plugin_type_name": "match",
+    "plugin_class_name": "analyser_regex",
+    "name": "Betalingskenmerk splitsen naar bijdrage ID of contact ID",
+    "description": "Deze matcher zoekt een bijdrage ID uit de betalingskenmerk.\r\nOf het campagne ID en het contact ID.",
+    "weight": "20",
+    "config": {
+        "rules": [
+            {
+                "fields": [
+                    "betalingskenmerk"
+                ],
+                "pattern": "\/[0-9]0{3}(?<contribution_id>[0-9]{12})\/",
+                "actions": [
+                    {
+                        "action": "copy_ltrim_zeros",
+                        "from": "contribution_id",
+                        "to": "contribution_id"
+                    }
+                ]
+            },
+            {
+                "fields": [
+                    "betalingskenmerk"
+                ],
+                "pattern": "\/[0-9](?<campaign_id>00[1-9]|0[1-9][0-9]|[1-9][0-9][0-9])(?<contact_id>[0-9]{12})\/",
+                "actions": [
+                    {
+                        "action": "copy_ltrim_zeros",
+                        "from": "campaign_id",
+                        "to": "campaign_id"
+                    },
+                    {
+                        "action": "copy_ltrim_zeros",
+                        "from": "contact_id",
+                        "to": "contact_id"
+                    }
+                ]
+            }
+        ]
+    },
+    "state": {}
+}

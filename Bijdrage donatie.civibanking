@@ -1,0 +1,47 @@
+{
+    "plugin_type_name": "match",
+    "plugin_class_name": "analyser_regex",
+    "name": "Bijdrage donatie",
+    "description": "Deze plugin genereert de optie om een bijdrage aan te maken o.b.v. de gegevens uit de vorige plugin en de naam van de betaler. Stel payment instrument en financial type in.",
+    "weight": "50",
+    "config": {
+        "rules": [
+            {
+                "comment": "Default values (matches always)",
+                "fields": [
+                    "purpose"
+                ],
+                "pattern": "#.*#",
+                "actions": [
+                    {
+                        "comment": "Default payment instrument is Overboeking (13)",
+                        "action": "set",
+                        "value": "13",
+                        "to": "payment_instrument_id"
+                    },
+                    {
+                        "comment": "Default financial type is Donatie (1)",
+                        "action": "set",
+                        "value": "1",
+                        "to": "financial_type_id"
+                    }
+                ]
+            },
+            {
+                "comment": "Adjuste financial type to Lidmaatschappen (2) if purpose contains 'lidmaatschap'",
+                "fields": [
+                    "purpose"
+                ],
+                "pattern": "#lidmaatschap#i",
+                "actions": [
+                    {
+                        "action": "set",
+                        "value": "13",
+                        "to": "financial_type_id"
+                    }
+                ]
+            }
+        ]
+    },
+    "state": []
+}

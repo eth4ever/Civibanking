@@ -1,0 +1,24 @@
+{
+    "plugin_type_name": "match",
+    "plugin_class_name": "analyser_regex",
+    "name": "Betalingskenmerk in het veld betalingskenmerk zetten",
+    "description": "Deze matcher zoekt naar een betalingskenmerk (dat is een 16 cijferig nummer) en zet dit nummer in het veld betalingskenmerk.",
+    "weight": "10",
+    "config": {
+        "rules": [
+            {
+                "pattern": "\/(?<betalingskenmerk>( ?\\d){16})\/",
+                "actions": [
+                    {
+                        "action": "preg_replace",
+                        "from": "betalingskenmerk",
+                        "search_pattern": "\/ \/",
+                        "replace": "",
+                        "to": "betalingskenmerk"
+                    }
+                ]
+            }
+        ]
+    },
+    "state": {}
+}

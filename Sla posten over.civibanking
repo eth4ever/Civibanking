@@ -1,0 +1,24 @@
+{
+    "plugin_type_name": "match",
+    "plugin_class_name": "matcher_ignore",
+    "name": "Sla posten over",
+    "description": "Sla posten over",
+    "weight": "1000",
+    "config": {
+        "ignore": [
+            {
+                "message": "Bankkosten",
+                "fields": [
+                    "name"
+                ],
+                "regex": "\/^Kosten$\/"
+            },
+            {
+                "field": "name",
+                "regex": "#^STG MOLLIE PAYMENTS$#",
+                "message": "Mollie uitbetaling"
+            }
+        ]
+    },
+    "state": []
+}

@@ -1,0 +1,33 @@
+{
+    "plugin_type_name": "match",
+    "plugin_class_name": "analyser_regex",
+    "name": "Betalingskenmerk matcher met alleen Bijdragenr",
+    "description": "Converteer kenmerk naar bijdrage id",
+    "weight": "30",
+    "config": {
+        "rules": [
+            {
+                "comment": "Converteer kenmerk naar bijdrage id",
+                "fields": [
+                    "Kenmerk",
+                    "purpose",
+                    "kenmerk"
+                ],
+                "pattern": "\/(?P<id>00000\\d{10}$)\/",
+                "actions": [
+                    {
+                        "action": "copy_ltrim_zeros",
+                        "from": "id",
+                        "to": "contribution_id"
+                    },
+                    {
+                        "action": "set",
+                        "value": 6639,
+                        "to": "test_contribution_id"
+                    }
+                ]
+            }
+        ]
+    },
+    "state": {}
+}

@@ -1,0 +1,25 @@
+{
+    "plugin_type_name": "match",
+    "plugin_class_name": "matcher_sepa",
+    "name": "Sepa matcher",
+    "description": "Sepa matcher",
+    "weight": "60",
+    "config": {
+        "auto_exec": false,
+        "received_date_minimum": "-15 days",
+        "received_date_maximum": "+10 days",
+        "deviation_penalty": 0.15,
+        "value_propagation": {},
+        "cancellation_enabled": true,
+        "cancellation_general_penalty": 0,
+        "cancellation_default_reason": "XX02",
+        "cancellation_cancel_reason": 1,
+        "cancellation_cancel_reason_source": "storno_code",
+        "cancellation_cancel_reason_default": "Onbekend",
+        "cancellation_create_activity": true,
+        "cancellation_create_activity_type_id": 37,
+        "cancellation_create_activity_subject": "SEPA Storno",
+        "cancellation_create_activity_assignee_id": 7108
+    },
+    "state": {}
+}

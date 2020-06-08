@@ -1,0 +1,40 @@
+{
+    "plugin_type_name": "match",
+    "plugin_class_name": "matcher_create",
+    "name": "Create Contribution",
+    "description": "This plugin will generate the suggestion to generate a new contribution from the given transaction.",
+    "weight": "70",
+    "config": {
+        "auto_exec": false,
+        "required_values": [
+            "btx.financial_type_id",
+            "btx.payment_instrument_id"
+        ],
+        "threshold": 0.2,
+        "penalties": [
+            {
+                "type": "suggestion",
+                "suggestion_type": "matcher_contribution",
+                "amount": 0.4
+            },
+            {
+                "type": "attribute",
+                "triggers": {
+                    "amount": "type.negative"
+                },
+                "amount": 0.8
+            }
+        ],
+        "value_propagation": {
+            "btx.financial_type_id": "contribution.financial_type_id",
+            "btx.campaign_id": "contribution.campaign_id",
+            "btx.payment_instrument_id": "contribution.payment_instrument_id"
+        },
+        "lookup_contact_by_name": {
+            "soft_cap_probability": 0.85,
+            "soft_cap_min": 4,
+            "hard_cap_probability": 0.85
+        }
+    },
+    "state": []
+}
