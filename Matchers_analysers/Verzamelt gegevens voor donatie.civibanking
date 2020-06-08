@@ -1,0 +1,61 @@
+{
+    "plugin_type_name": "match",
+    "plugin_class_name": "analyser_regex",
+    "name": "Verzamelt gegevens voor donatie",
+    "description": "Deze analyser verzamelt de gegevens om een bijdrage te cre\u00ebren met het financi\u00eble type Donatie. Staat er \"Lidmaatschap\" in de omschrijving dan wordt het financieel type \"Lidmaatschap\". Stel de juiste ID's voor financial type en payment instrument in.\r\n",
+    "weight": "50",
+    "config": {
+        "rules": [
+            {
+                "comment": "Default values (matches always)",
+                "fields": [
+                    "purpose"
+                ],
+                "pattern": "#.*#",
+                "actions": [
+                    {
+                        "comment": "Default payment instrument is Overboeking (10)",
+                        "action": "set",
+                        "value": "10",
+                        "to": "payment_instrument_id"
+                    },
+                    {
+                        "comment": "Default financial type is Donatie (1)",
+                        "action": "set",
+                        "value": "1",
+                        "to": "financial_type_id"
+                    }
+                ]
+            },
+            {
+                "comment": "Adjuste financial type to Lidmaatschap (2) if purpose contains 'Lidmaatschap'",
+                "fields": [
+                    "purpose"
+                ],
+                "pattern": "#Lidmaatschap#i",
+                "actions": [
+                    {
+                        "action": "set",
+                        "value": "2",
+                        "to": "financial_type_id"
+                    }
+                ]
+            },
+            {
+                "comment": "Adjuste financial type to Lidmaatschap (2) if purpose contains 'Contributie'",
+                "fields": [
+                    "purpose"
+                ],
+                "pattern": "#Contributie#i",
+                "actions": [
+                    {
+                        "action": "set",
+                        "value": "2",
+                        "to": "financial_type_id"
+                    }
+                ]
+            }
+        ]
+    },
+    "state": []
+}
